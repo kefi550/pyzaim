@@ -78,8 +78,17 @@ class ZaimAPI:
     def verify(self):
         return self.auth.get(self.verify_url).json()
 
-    def get_data(self, params=None):
-        return self.auth.get(self.money_url, params=params).json()["money"]
+    def get_data(
+        self,
+        params=None,
+        id_name_resolve=False
+    ):
+        data = self.auth.get(self.money_url, params=params).json()["money"]
+        if id_name_resolve:
+            for row in data:
+                row['genre_name'] = self.genre_itos[row['genre_id']]
+                row['category_name'] = self.category_itos[row['category_id']]
+        return data
 
     def insert_payment_simple(
         self,
