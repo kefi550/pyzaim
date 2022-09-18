@@ -426,6 +426,9 @@ class ZaimCrawler:
     def close(self):
         self.driver.close()
 
+    def quit(self):
+        self.driver.quit()
+
     def crawler(self, year, progress):
         table = self.driver.find_element_by_xpath(
             "//*[starts-with(@class, 'SearchResult-module__list___')]")
