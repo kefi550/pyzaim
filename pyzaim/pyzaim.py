@@ -397,6 +397,9 @@ class ZaimCrawler:
         self.data = []
         self.current = 0
 
+    def __del__(self):
+        self.driver.quit()
+
     def get_data(self, year, month, progress=True):
         day_len = calendar.monthrange(int(year), int(month))[1]
         year = str(year)
